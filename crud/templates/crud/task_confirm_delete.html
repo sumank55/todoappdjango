@@ -1,0 +1,11 @@
+{% extends 'crud/base.html' %}
+{% block content %}
+
+
+<h2><a href="{% url 'tasklist' %}">Go Back</a></h2>
+<form method="POST">
+  {% csrf_token %}
+  <h3>Are you sure you want to delete this task? "{{task}}"</h3>
+  <input type="submit" value="Delete"  class="btn btn-danger sm"/>
+</form>
+{% endblock content %}
