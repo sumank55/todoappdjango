@@ -14,10 +14,6 @@ from django.contrib import messages
 from django.views import View
 
 
-
-
-
-
 class CustomerRegistrationView(View):
     def get(self,request):
         form = CustomerRegistrationsForms()
@@ -45,9 +41,11 @@ class LoginView(LoginView):
 class TaskList(LoginRequiredMixin,ListView):
     model = Task
     context_object_name = 'tasks'
+    print("ontext_object_name",context_object_name)
     def get_context_data(self, **kwargs,):
         context = super().get_context_data(**kwargs)
-        context['tasks']=Task.objects.filter(user=self.request.user).exists()
+        context['tasks']=Task.objects.filter(user=self.request.user)
+        print("self.request.user",self.request.user)
         context['count']=Task.objects.filter(complete=False).count()
         search_input=self.request.GET.get('search-area') or ''
         if search_input:
